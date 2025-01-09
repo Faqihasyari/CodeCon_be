@@ -18,7 +18,7 @@ Future<Response> onRequest(RequestContext context) async {
     ))['records'] as List;
     if (existingRecords.isEmpty) {
       final transactionRequest = await DuitkuServices(merchantData: mechantData)
-          .getTransactionRequest(params: params, callbackUrl: 'https://codecon_be3.globeapp.dev/callback');
+          .getTransactionRequest(params: params, callbackUrl: 'https://codecon_be4.globeapp.dev/callback');
 
       final result = await AirtableServices(airtableData).createRecord(
         fields: {
@@ -29,7 +29,7 @@ Future<Response> onRequest(RequestContext context) async {
               as Map<String, dynamic>)['reference'],
           'Status': 'PENDING',
           'Payment URL': (await transactionRequest.json()
-              as Map<String, dynamic>)['PaymentUrl'],
+              as Map<String, dynamic>)['paymentUrl'],
         },
       );
 
